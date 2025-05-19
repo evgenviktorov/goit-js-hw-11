@@ -15,9 +15,18 @@ export function renderImages(images, query) {
   clearGallery();
   if (images.length === 0) {
     iziToast.error({
-      title: 'No results',
-      message: `Sorry, there are no images matching your search query: ${query}. Please try again!`,
+      title: '',
+      message: `Sorry, there are no images matching <br> your search query: "${query}". Please try again!`,
       position: 'topRight',
+      backgroundColor: '#f44336',
+      messageColor: '#ffffff',
+      iconColor: '#fff',
+      close: false,
+      closeOnClick: true,
+      closeOnEscape: true,
+      timeout: 8000,
+      progressBarColor: '#ffffff',
+      layout: 2,
     });
     return;
   }
