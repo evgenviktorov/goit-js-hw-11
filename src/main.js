@@ -8,7 +8,6 @@ import {
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-// Вибір елементів з DOM
 const form = document.querySelector('.form');
 const searchInput = document.querySelector('input[name="search-text"]');
 
@@ -26,7 +25,6 @@ form.addEventListener('submit', event => {
     return;
   }
 
-  // Очищуємо попередні результати, показуємо лоадер
   clearGallery();
   showLoader();
 

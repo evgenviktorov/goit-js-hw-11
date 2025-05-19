@@ -6,15 +6,13 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const galleryContainer = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 
-// Ініціалізація SimpleLightbox
 let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
 
 export function renderImages(images, query) {
-  clearGallery(); // Очищення галереї перед рендерингом
-
+  clearGallery();
   if (images.length === 0) {
     iziToast.error({
       title: 'No results',
@@ -25,32 +23,41 @@ export function renderImages(images, query) {
   }
 
   const markup = images
-    .map(image => {
-      return `
-      <a class="photo-card" href="${image.largeImageURL}">
-        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
-        <div class="info">
-          <p class="info-item">
-            <b>Likes:</b> ${image.likes}
-          </p>
-          <p class="info-item">
-            <b>Views:</b> ${image.views}
-          </p>
-          <p class="info-item">
-            <b>Comments:</b> ${image.comments}
-          </p>
-          <p class="info-item">
-            <b>Downloads:</b> ${image.downloads}
-          </p>
+    .map(
+      ({
+        previewURL,
+        largeImageURL,
+        tags,
+        comments,
+        downloads,
+        likes,
+        views,
+      }) =>
+        `<li class="gallery-link"><a class="gallery-item" href="${largeImageURL}">
+  <img class="gallery-image" src="${previewURL}" alt="${tags}"/></a>
+  <div class="info">
+        <div class="info-list">
+          <h4 class="info-title">Likes</h4>
+          <p class="info-text">${likes}</p>
         </div>
-      </a>
-    `;
-    })
+        <div class="info-list">
+          <h4 class="info-title">Views</h4>
+          <p class="info-text">${views}</p>
+        </div>
+        <div class="info-list">
+          <h4 class="info-title">Comments</h4>
+          <p class="info-text">${comments}</p>
+        </div>
+        <div class="info-list">
+          <h4 class="info-title">Downloads</h4>
+          <p class="info-text">${downloads}</p>
+        </div>
+      </div></li> `
+    )
     .join('');
 
   galleryContainer.insertAdjacentHTML('beforeend', markup);
 
-  // Оновлюємо SimpleLightbox після додавання нових зображень
   lightbox.refresh();
 }
 
