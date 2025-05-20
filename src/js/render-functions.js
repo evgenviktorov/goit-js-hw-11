@@ -34,7 +34,7 @@ export function renderImages(images, query) {
   const markup = images
     .map(
       ({
-        previewURL,
+        webformatURL,
         largeImageURL,
         tags,
         comments,
@@ -43,7 +43,7 @@ export function renderImages(images, query) {
         views,
       }) =>
         `<li class="gallery-link"><a class="gallery-item" href="${largeImageURL}">
-  <img class="gallery-image" src="${previewURL}" alt="${tags}"/></a>
+  <img class="gallery-image" src="${webformatURL}" alt="${tags}"/></a>
   <div class="info">
         <div class="info-list">
           <h4 class="info-title">Likes</h4>
